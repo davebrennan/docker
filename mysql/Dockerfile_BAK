@@ -1,0 +1,15 @@
+FROM mysql
+ENV MYSQL_ROOT_PASSWORD=secret
+WORKDIR /home/mysql
+COPY buildMySQLTables.py ./
+RUN apt-get update && apt-get install -y python3 python3-setuptools curl
+RUN python3 --version
+RUN curl https://bootstrap.pypa.io/get-pip.py -o ./get-pip.py
+RUN python3 ./get-pip.py
+RUN pip3 --version
+RUN pip3 install mysql-connector
+RUN pip install mysql-connector-python
+RUN echo "Hostname:"
+RUN hostname
+RUN hostname | set HOSTNAME
+#RUN python3 ./buildMySQLTables.py

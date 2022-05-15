@@ -1,0 +1,15 @@
+#Run the following in order
+
+# this will build an image using the Dockerfile in the current directory and name it mycustommysql
+docker build -t mycustommysql .
+
+# this will run a containing using the newly built image named mycustommysql
+docker run -dp6603:3306 mycustommysql
+
+# this will uses mysql to connect to the container through port 6603
+mysql -uroot -psecret -h127.0.0.1 -P6603
+
+# connect to bash termianl
+docker exec -it [container-name] bash
+
+# file that get copied from local to Docker image path of /docker-entrypoint-initdb.d folder will be executedon first startup of container not when container is created
